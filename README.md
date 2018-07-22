@@ -1,2 +1,15 @@
 # VSNotey
-Simple Visual Studio Extension for holding Text Snippets while working
+
+
+VSNotey allows you to have a quick notepad to type out thoughts without leaving the IDE. I wrote this extension because myself and a co worker got tired of switching between IDE and notepad or a physical jotter.
+
+For now VS Notey only allows you type in text as you work, text is lost when you close IDE.
+
+Download Extension from [VSNotey](http://example.com)
+
+## Feature Roadmap
+
+* Save Notes in Solution folder and load same on solution load.
+
+* Create Mutiple Notes in same Solution (Swith between them with tabs)
+
