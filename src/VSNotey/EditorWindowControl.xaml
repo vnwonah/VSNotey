@@ -9,24 +9,29 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Name="VSNoteyWindow">
-    <Grid>
+    <Grid
+        Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            
-            <Button Background="White" Width="20" Height="20" Margin="5,5,5,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <StackPanel Orientation="Horizontal"
+                    Background="{DynamicResource VsBrush.EnvironmentBackgroundGradient}">
+
+            <Button Background="{DynamicResource VsBrush.EnvironmentBackgroundGradient}" Width="20" Height="20" Margin="5,5,5,0" VerticalAlignment="Top" Click="Button_Click"/>
         </StackPanel>
         <RichTextBox HorizontalAlignment="Left" Background="Transparent"
                      BorderThickness="0"
                      Grid.Row="1"
+                     
                     >
             <FlowDocument>
                 <Paragraph>
                     <Run 
                          x:Name="txtBox"
-                        Text="RichTextBox"/>
+                        Text="RichTextBox"
+                        Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
+                        />
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>

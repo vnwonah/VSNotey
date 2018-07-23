@@ -1,10 +1,12 @@
 ﻿namespace VSNotey
 {
     using Microsoft.VisualStudio.Settings;
+    using Microsoft.VisualStudio.Shell.Interop;
     using Microsoft.VisualStudio.Shell.Settings;
     using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
@@ -14,12 +16,16 @@
     /// </summary>
     public partial class EditorWindowControl : UserControl
     {
+        private object uiShell;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EditorWindowControl"/> class.
         /// </summary>
         public EditorWindowControl()
         {
             this.InitializeComponent();
+
+
         }
 
        
