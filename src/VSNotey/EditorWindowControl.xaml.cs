@@ -1,5 +1,10 @@
 ﻿namespace VSNotey
 {
+    using Microsoft.VisualStudio.Settings;
+    using Microsoft.VisualStudio.Shell.Settings;
+    using Microsoft.Win32;
+    using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
@@ -17,6 +22,8 @@
             this.InitializeComponent();
         }
 
+       
+
         /// <summary>
         /// Handles click on the button by displaying a message box.
         /// </summary>
@@ -29,6 +36,21 @@
             MessageBox.Show(
                 string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
                 "EditorWindow");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\VisualStudio\\15.0");
+
+            if (key != null)
+            {
+                string[] values = key.GetValueNames();
+
+                foreach (var item in values)
+                {
+                    txtBox.Text += "\n" + item;
+                }
+            }
         }
     }
 }

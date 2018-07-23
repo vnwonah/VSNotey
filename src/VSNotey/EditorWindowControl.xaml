@@ -10,10 +10,23 @@
              d:DesignHeight="300" d:DesignWidth="300"
              Name="VSNoteyWindow">
     <Grid>
-        <RichTextBox HorizontalAlignment="Left" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            
+            <Button Background="White" Width="20" Height="20" Margin="5,5,5,0" VerticalAlignment="Top" Click="Button_Click"/>
+        </StackPanel>
+        <RichTextBox HorizontalAlignment="Left" Background="Transparent"
+                     BorderThickness="0"
+                     Grid.Row="1"
+                    >
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="RichTextBox"/>
+                    <Run 
+                         x:Name="txtBox"
+                        Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
