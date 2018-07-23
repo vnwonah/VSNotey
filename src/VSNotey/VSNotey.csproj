@@ -75,8 +75,10 @@
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
     <Content Include="index.html" />
+    <Content Include="Resources\add.png" />
     <Content Include="Resources\EditorWindowCommand.png" />
     <Content Include="Resources\EditorWindowPackage.ico" />
+    <Content Include="Resources\subtract.png" />
     <Content Include="stylesheet.css" />
   </ItemGroup>
   <ItemGroup>

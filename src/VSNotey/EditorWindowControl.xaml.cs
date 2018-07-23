@@ -44,19 +44,16 @@
                 "EditorWindow");
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+       
+        private void addimage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\VisualStudio\\15.0");
+            txtBox.FontSize += 1;
+        }
 
-            if (key != null)
-            {
-                string[] values = key.GetValueNames();
-
-                foreach (var item in values)
-                {
-                    txtBox.Text += "\n" + item;
-                }
-            }
+        private void subimage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (txtBox.FontSize > 6)
+                txtBox.FontSize -= 1;
         }
     }
 }

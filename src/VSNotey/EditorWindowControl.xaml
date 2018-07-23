@@ -12,28 +12,24 @@
     <Grid
         Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="28"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"
                     Background="{DynamicResource VsBrush.EnvironmentBackgroundGradient}">
 
-            <Button Background="{DynamicResource VsBrush.EnvironmentBackgroundGradient}" Width="20" Height="20" Margin="5,5,5,0" VerticalAlignment="Top" Click="Button_Click"/>
+            <Image x:Name="addimage" Source="C:\Users\Vincent Nwonah\source\repos\VSNotey\src\VSNotey\Resources\add.png" Height="12" Width="12" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,0,0,0" ToolTipService.ToolTip="Increase Text Size" MouseDown="addimage_MouseDown"/>
+            <Image x:Name="subimage" Source="C:\Users\Vincent Nwonah\source\repos\VSNotey\src\VSNotey\Resources\subtract.png" Height="12" Width="12" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0" ToolTipService.ToolTip="Reduce Text Size" MouseDown="subimage_MouseDown"/>
+
         </StackPanel>
         <RichTextBox HorizontalAlignment="Left" Background="Transparent"
                      BorderThickness="0"
+                     Padding="5"
                      Grid.Row="1"
-                     
-                    >
-            <FlowDocument>
-                <Paragraph>
-                    <Run 
-                         x:Name="txtBox"
-                        Text="RichTextBox"
-                        Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
-                        />
-                </Paragraph>
-            </FlowDocument>
+                     x:Name="txtBox"
+                     CaretBrush="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
+                     Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}">
+            
         </RichTextBox>
     </Grid>
 </UserControl>
