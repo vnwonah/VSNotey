@@ -75,6 +75,10 @@
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
     <Content Include="index.html" />
+    <Content Include="license.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\add.png" />
     <Content Include="Resources\EditorWindowCommand.png" />
     <Content Include="Resources\EditorWindowPackage.ico" />
