@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSNotey.fbab6112-3803-4913-b685-32416a205f68" Version="1.0" Language="en-US" Publisher="Vincent Nwonah" />
+        <Identity Id="VSNotey.3a7c32d3-5ed2-4c2f-b65b-91c049894201" Version="1.0" Language="en-US" Publisher="Vincent Nwonah" />
         <DisplayName>VSNotey</DisplayName>
         <Description xml:space="preserve">Notes Extension for Visual Studio
 
 Developed by Vincent Nwonah</Description>
         <MoreInfo>https://github.com/vnwonah/VSNotey</MoreInfo>
         <License>license.txt</License>
+        <ReleaseNotes>release.txt</ReleaseNotes>
+        <Icon>Resources\icon.ico</Icon>
+        <PreviewImage>Resources\icon.ico</PreviewImage>
         <Tags>Note, Notepad, Notey, VSNotey</Tags>
     </Metadata>
     <Installation>
