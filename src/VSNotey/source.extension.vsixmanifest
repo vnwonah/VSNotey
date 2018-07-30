@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSNotey.3a7c32d3-5ed2-4c2f-b65b-91c049894201" Version="1.0" Language="en-US" Publisher="Vincent Nwonah" />
+        <Identity Id="VSNotey.3a7c32d3-5ed2-4c2f-b65b-91c049894201" Version="1.01" Language="en-US" Publisher="Vincent Nwonah" />
         <DisplayName>VSNotey</DisplayName>
         <Description xml:space="preserve">Notes Extension for Visual Studio
 

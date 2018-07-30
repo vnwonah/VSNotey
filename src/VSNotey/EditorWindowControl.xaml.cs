@@ -8,8 +8,11 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// Interaction logic for EditorWindowControl.
@@ -24,6 +27,15 @@
         public EditorWindowControl()
         {
             this.InitializeComponent();
+
+
+            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string add = Path.Combine(assemblyFolder, "Images", "add.png");
+            string sub = Path.Combine(assemblyFolder, "Images", "subtract.png");
+
+
+            addimage.Source = new BitmapImage( new Uri(add));
+            subimage.Source = new BitmapImage(new Uri(sub));
 
 
         }
@@ -54,6 +66,19 @@
         {
             if (txtBox.FontSize > 6)
                 txtBox.FontSize -= 1;
+        }
+
+        public string GetImageFullPath(string filename)
+        {
+            var x =  Path.Combine(
+                    //Get the location of your package dll
+                    System.Reflection.Assembly.GetExecutingAssembly().Location,
+                    //reference your 'images' folder
+                    "Images\\",
+                    filename
+                 );
+
+            return x;
         }
     }
 }
