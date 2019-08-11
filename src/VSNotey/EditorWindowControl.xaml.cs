@@ -62,6 +62,7 @@ namespace VSNotey
                 _dteEvents = _dte.Events;
                 _slnEvents = _dteEvents.SolutionEvents;
                 _slnEvents.Opened += OnSolutionOpened;
+                _slnEvents.BeforeClosing += OnSolutionClosing;
 
               
             }
@@ -70,6 +71,26 @@ namespace VSNotey
 
             }
           
+        }
+
+        private async void OnSolutionClosing()
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            try
+            {
+                var text = ConvertRichTextBoxContentsToString(txtBox);
+
+                string solutionDir = Path.GetDirectoryName(_dte.Solution.FullName);
+
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(solutionDir, "notes.notey")))
+                {
+                    await outputFile.WriteAsync(text);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void OnSolutionOpened()
@@ -128,6 +149,8 @@ namespace VSNotey
                 {
                     await outputFile.WriteAsync(text);
                 }
+
+                MessageBox.Show("Notes Saved");
             }
             catch (Exception ex)
             {
