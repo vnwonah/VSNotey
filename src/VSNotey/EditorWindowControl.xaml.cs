@@ -44,9 +44,24 @@
             saveimage.Source = new BitmapImage(new Uri(save));
 
 
+            try
+            {
+                string solutionPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+
+                var strs = solutionPath.Split('\\');
+                strs[strs.Count() - 1] = string.Empty;
+                solutionPath = string.Join("\\", strs);
+
+                txtBox.AppendText(File.ReadAllText(Path.Combine(solutionPath, "notes.notey")));
+            }
+            catch (Exception e)
+            {
+
+            }
+          
         }
 
-       
+
 
         /// <summary>
         /// Handles click on the button by displaying a message box.
