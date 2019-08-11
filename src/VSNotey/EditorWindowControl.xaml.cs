@@ -1,5 +1,7 @@
 ﻿namespace VSNotey
 {
+    using EnvDTE;
+    using EnvDTE80;
     using Microsoft.VisualStudio.Settings;
     using Microsoft.VisualStudio.Shell.Interop;
     using Microsoft.VisualStudio.Shell.Settings;
@@ -9,9 +11,11 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Documents;
     using System.Windows.Media.Imaging;
 
     /// <summary>
@@ -32,10 +36,12 @@
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string add = Path.Combine(assemblyFolder, "Images", "add.png");
             string sub = Path.Combine(assemblyFolder, "Images", "subtract.png");
+            string save = Path.Combine(assemblyFolder, "Images", "save.png");
 
 
             addimage.Source = new BitmapImage( new Uri(add));
             subimage.Source = new BitmapImage(new Uri(sub));
+            saveimage.Source = new BitmapImage(new Uri(save));
 
 
         }
@@ -66,6 +72,27 @@
         {
             if (txtBox.FontSize > 6)
                 txtBox.FontSize -= 1;
+        }
+
+        private async void saveimage_MouseDown(object sebder, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var text = ConvertRichTextBoxContentsToString(txtBox);
+            string solutionPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+
+            var strs = solutionPath.Split('\\');
+            strs[strs.Count() - 1] = string.Empty;
+            solutionPath = string.Join("\\", strs);
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(solutionPath, "notes.notey")))
+            {
+                await outputFile.WriteAsync(text);
+            }
+
+        }
+
+        private string ConvertRichTextBoxContentsToString(RichTextBox rtb)
+        {
+            System.Windows.Documents.TextRange textRange = new System.Windows.Documents.TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+            return textRange.Text;
         }
 
         public string GetImageFullPath(string filename)
