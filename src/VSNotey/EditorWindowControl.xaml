@@ -18,8 +18,11 @@
         <StackPanel Orientation="Horizontal"
                     Background="{DynamicResource VsBrush.EnvironmentBackgroundGradient}">
 
+            <Image x:Name="saveimage" Height="12" Width="12" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0" ToolTipService.ToolTip="Save Text" MouseDown="saveimage_MouseDown"/>
             <Image x:Name="addimage" Height="12" Width="12" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,0,0,0" ToolTipService.ToolTip="Increase Text Size" MouseDown="addimage_MouseDown"/>
             <Image x:Name="subimage" Height="12" Width="12" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0" ToolTipService.ToolTip="Reduce Text Size" MouseDown="subimage_MouseDown"/>
+
+
 
         </StackPanel>
         <RichTextBox HorizontalAlignment="Left" Background="Transparent"
