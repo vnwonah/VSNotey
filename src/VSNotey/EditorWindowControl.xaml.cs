@@ -1,4 +1,9 @@
-﻿namespace VSNotey
+﻿using Microsoft;
+using Microsoft.VisualStudio.Shell;
+using System.Globalization;
+using System.Windows.Input;
+
+namespace VSNotey
 {
     using EnvDTE;
     using EnvDTE80;
@@ -28,8 +33,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="EditorWindowControl"/> class.
         /// </summary>
+        /// 
+        private Events _dteEvents;
+        private SolutionEvents _slnEvents;
+        private DTE _dte;
         public EditorWindowControl()
         {
+            Dispatcher.VerifyAccess();
             this.InitializeComponent();
 
 
@@ -46,19 +56,35 @@
 
             try
             {
-                string solutionPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
 
-                var strs = solutionPath.Split('\\');
-                strs[strs.Count() - 1] = string.Empty;
-                solutionPath = string.Join("\\", strs);
+                _dte = (DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
 
-                txtBox.AppendText(File.ReadAllText(Path.Combine(solutionPath, "notes.notey")));
+                _dteEvents = _dte.Events;
+                _slnEvents = _dteEvents.SolutionEvents;
+                _slnEvents.Opened += OnSolutionOpened;
+
+              
             }
             catch (Exception e)
             {
 
             }
           
+        }
+
+        private void OnSolutionOpened()
+        {
+            try
+            {
+                Dispatcher.VerifyAccess();
+                string solutionDir = Path.GetDirectoryName(_dte.Solution.FullName);
+                txtBox.AppendText(File.ReadAllText(Path.Combine(solutionDir, "notes.notey")));
+            }
+            catch (Exception)
+            {
+
+            }
+           
         }
 
 
@@ -73,34 +99,41 @@
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
+                string.Format(CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
                 "EditorWindow");
         }
 
        
-        private void addimage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void addimage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtBox.FontSize += 1;
         }
 
-        private void subimage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void subimage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (txtBox.FontSize > 6)
                 txtBox.FontSize -= 1;
         }
 
-        private async void saveimage_MouseDown(object sebder, System.Windows.Input.MouseButtonEventArgs e)
+        private async void saveimage_MouseDown(object sebder, MouseButtonEventArgs e)
         {
-            var text = ConvertRichTextBoxContentsToString(txtBox);
-            string solutionPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-
-            var strs = solutionPath.Split('\\');
-            strs[strs.Count() - 1] = string.Empty;
-            solutionPath = string.Join("\\", strs);
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(solutionPath, "notes.notey")))
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            try
             {
-                await outputFile.WriteAsync(text);
+                var text = ConvertRichTextBoxContentsToString(txtBox);
+
+                string solutionDir = Path.GetDirectoryName(_dte.Solution.FullName);
+
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(solutionDir, "notes.notey")))
+                {
+                    await outputFile.WriteAsync(text);
+                }
             }
+            catch (Exception ex)
+            {
+               
+            }
+           
 
         }
 
@@ -114,7 +147,7 @@
         {
             var x =  Path.Combine(
                     //Get the location of your package dll
-                    System.Reflection.Assembly.GetExecutingAssembly().Location,
+                    Assembly.GetExecutingAssembly().Location,
                     //reference your 'images' folder
                     "Images\\",
                     filename
